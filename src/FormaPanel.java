@@ -7,13 +7,14 @@ import javax.swing.JPanel;
 public class FormaPanel extends JPanel {
 	
 	private String forma;
+	private Color cor;
 	
-	private final static Color[] cores = {Color.BLACK, Color.BLUE, Color.BLUE, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.GREEN, Color.LIGHT_GRAY,
-			Color.MAGENTA, Color.ORANGE, Color.PINK, Color.RED, Color.WHITE, Color.YELLOW};
+	
 	private final SecureRandom aleatorio = new SecureRandom();
 	
-	public FormaPanel(String forma) {
+	public FormaPanel(String forma, Color cor) {
 		
+		this.cor = cor;
 		this.forma = forma;
 		
 	}
@@ -22,7 +23,7 @@ public class FormaPanel extends JPanel {
 		
 		for(int i = 0; i < 20; i++) {
 		
-		g.setColor(cores[aleatorio.nextInt(cores.length)]);	
+		g.setColor(cor);	
 			
 		int x = aleatorio.nextInt(getWidth());
 		int y = aleatorio.nextInt(getHeight());
@@ -60,6 +61,16 @@ public class FormaPanel extends JPanel {
 	public void setForma(String forma) {
 		this.forma = forma;
 	}
+
+	public Color getCor() {
+		return cor;
+	}
+
+	public void setCor(Color cor) {
+		this.cor = cor;
+	}
+	
+	
 	
 	
 	
