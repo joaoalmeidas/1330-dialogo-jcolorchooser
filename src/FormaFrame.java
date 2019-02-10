@@ -1,9 +1,12 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
+import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,8 +17,8 @@ public class FormaFrame extends JFrame{
 	private final static String[] formas = {"Circulo", "Retangulo", "Linha", "Arco"};
 	
 	private JComboBox<String> boxCores;
-	private JColorChooser cores;
 	private Color cor;
+	private JButton botao;
 	
 	private JPanel panelBox;
 	private FormaPanel panelForma;
@@ -25,14 +28,15 @@ public class FormaFrame extends JFrame{
 		boxCores = new JComboBox<String>(formas);
 		boxCores.setMaximumRowCount(3);
 		
-		cores = new JColorChooser();
-		cor = cores.getColor();
+		botao = new JButton("Cor");
+		
+		cor = Color.GRAY;
 		
 		panelBox = new JPanel(new FlowLayout());
 		panelForma = new FormaPanel(boxCores.getItemAt(0), cor);
 		
 		panelBox.add(boxCores);
-		panelBox.add(cores);
+		panelBox.add(botao);
 		
 		add(panelBox, BorderLayout.NORTH);
 		add(panelForma);
@@ -49,6 +53,31 @@ public class FormaFrame extends JFrame{
 			}
 			
 		});
+		
+		botao.addActionListener(
+				
+				new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent arg0) {
+						
+						cor = JColorChooser.showDialog(FormaFrame.this, "Excolha uma cor", cor);
+						
+						if(cor == null) {
+							
+							cor = Color.LIGHT_GRAY;
+							
+						}
+						
+						panelForma.setCor(cor);
+						
+						repaint();
+						
+					}
+					
+					
+				}
+		);
 		
 	}
 }
